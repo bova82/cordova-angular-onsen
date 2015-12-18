@@ -1,0 +1,25 @@
+{
+  "name": "myApp",
+  "description": "",
+  "main": "index.html",
+  "authors": [
+    "Bova"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "amd",
+    "es6"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "OnsenUI": "onsenui#~1.3.14",
+    "angular": "angularjs#~1.4.8"
+  }
+}
