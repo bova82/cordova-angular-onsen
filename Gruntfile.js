@@ -42,7 +42,8 @@ module.exports = function(grunt) {
         src: [
           'www/scripts/{,*/}*.js',
           'www/styles/{,*/}*.css',
-          //'www/**/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          'www/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+          'www/fonts/*',
         ]
       }
     },
@@ -66,7 +67,7 @@ module.exports = function(grunt) {
     // Performs rewrites based on filerev and the useminPrepare configuration
     usemin: {
       html: ['www/{,*/}*.html'],
-      css: ['www/css/{,*/}*.css'],
+      css: ['www/styles/{,*/}*.css'],
       js: ['www/scripts/{,*/}*.js'],
       options: {
         assetsDirs: [
@@ -75,9 +76,7 @@ module.exports = function(grunt) {
           'www/css'
         ],
         patterns: {
-          html: [[/(img\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']],
-          css: [[/(img\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']],
-          js: [[/(img\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
+          html: [[/(img\/[^''""]*\.(png|jpg|jpeg|gif|webp|svg))/g, 'Replacing references to images']]
         }
       }
     },
@@ -103,6 +102,19 @@ module.exports = function(grunt) {
             }
         }
       }
+    },
+
+    autoprefixer: {
+      options: {
+        options: {
+          browsers: [
+            'last 5 Chrome versions',
+            'last 5 Firefox versions',
+            'not ie <= 8',
+            '>3%'
+          ]
+        }
+      },
     },
 
     exec: {
@@ -156,10 +168,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-wiredep');
   grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-autoprefixer');
 
   // Default task(s).
   grunt.registerTask('default', ['run_browser']);
-  grunt.registerTask('build_cordova', ['clean', 'wiredep', 'useminPrepare', 'concat', 'uglify', 'cssmin', 'copy', 'filerev', 'usemin']);
+  grunt.registerTask('build_cordova', ['clean', 'wiredep', 'useminPrepare',
+      'concat', 'uglify', 'autoprefixer', 'cssmin', 'copy', 'filerev', 'usemin']);
   grunt.registerTask('run_browser', ['build_cordova', 'exec:run_browser']);
   grunt.registerTask('run_android', ['build_cordova', 'exec:run_android']);
   grunt.registerTask('emulate_android', ['build_cordova', 'exec:emulate_android']);
