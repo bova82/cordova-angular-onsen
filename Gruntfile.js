@@ -15,16 +15,42 @@ module.exports = function(grunt) {
             'www/.git{,*/}*'
           ]
         }]
+      },
+      css: {
+        files: [{
+          src: ['app/css/*.css']
+        }]
       }
     },
 
     watch: {
+      js: {
+        files: ['app/**/*.js'],
+        tasks: [],
+        options: {
+          livereload: true
+        }
+      },
+      html : {
+        files: ['app/**/*.html'],
+        tasks: ['wiredep'],
+        options: {
+          livereload: true
+        }
+      }
       bower: {
         files: ['bower.json'],
-        tasks: ['wiredep']
+        tasks: ['wiredep'],
+        options: {
+          livereload: true
+        }
       },
-      livereload: {
-        files: ['app/{,*/}*']
+      sass: {
+        files: ['app/sass/*.sass', 'app/sass/*.scss'],
+        tasks: ['clean:css', 'compass'],
+        options: {
+          livereload: true
+        }
       }
     },
 
@@ -183,7 +209,7 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['run_browser']);
-  grunt.registerTask('build_cordova', ['clean', 'wiredep', 'compass', 'useminPrepare',
+  grunt.registerTask('build_cordova', ['clean:build', 'wiredep', 'compass', 'useminPrepare',
       'concat', 'uglify', 'autoprefixer', 'cssmin', 'copy', 'filerev', 'usemin']);
   grunt.registerTask('run_browser', ['build_cordova', 'exec:run_browser']);
   grunt.registerTask('run_android', ['build_cordova', 'exec:run_android']);
