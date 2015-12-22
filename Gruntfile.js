@@ -10,6 +10,7 @@ module.exports = function(grunt) {
           dot: true,
           src: [
             '.tmp',
+            'app/css/*.css',
             'www/{,*/}*',
             'www/.git{,*/}*'
           ]
@@ -45,6 +46,15 @@ module.exports = function(grunt) {
           'www/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
           'www/fonts/*',
         ]
+      }
+    },
+
+    compass : {
+      dist: {
+        options: {
+          sassDir: 'app/sass',
+          cssDir: 'app/css'
+        }
       }
     },
 
@@ -165,6 +175,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-wiredep');
   grunt.loadNpmTasks('grunt-exec');
@@ -172,7 +183,7 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['run_browser']);
-  grunt.registerTask('build_cordova', ['clean', 'wiredep', 'useminPrepare',
+  grunt.registerTask('build_cordova', ['clean', 'wiredep', 'compass', 'useminPrepare',
       'concat', 'uglify', 'autoprefixer', 'cssmin', 'copy', 'filerev', 'usemin']);
   grunt.registerTask('run_browser', ['build_cordova', 'exec:run_browser']);
   grunt.registerTask('run_android', ['build_cordova', 'exec:run_android']);
