@@ -54,12 +54,10 @@
             </div>
           </ons-toolbar>
           <div ng-controller="MainController" class="app">
-            <h1>Apache Cordova Test</h1>
-            <div id="deviceready">
-              <ons-button class="btn-delete event received">
-                Button {{name}}
-              </ons-button>
-            </div>
+            <p>Apache Cordova Test</p>
+            <ons-button class="btn-delete">
+              Button {{name}}
+            </ons-button>
           </div>
         </ons-page>
         <script type="text/javascript" src="cordova.js"></script>
@@ -70,7 +68,6 @@
         <!-- endbower -->
         <!-- endbuild -->
         <!-- build:js scripts/scripts.js -->
-        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
         <script type="text/javascript" src="js/controllers/main.js"></script>
         <!-- endbuild -->

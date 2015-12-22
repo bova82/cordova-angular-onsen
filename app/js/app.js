@@ -1,1 +1,1 @@
-angular.module('test', ['onsen']);
+var module = ons.bootstrap('test', ['onsen']);

@@ -1,4 +1,5 @@
-angular.module('test')
-  .controller('MainController', ['$scope', function($scope) {
+module.controller('MainController', ['$scope', function($scope) {
+  ons.ready(function() {
     $scope.name = "Test";
-  }]);
+  });
+}]);
